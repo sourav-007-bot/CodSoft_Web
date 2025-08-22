@@ -13,7 +13,7 @@
       margin: 0;
       background: linear-gradient(135deg, #6a11cb, #2575fc);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+}
 
     .calculator {
       background: #fff;
@@ -22,8 +22,7 @@
       width: 340px;
       padding: 25px;
       display: flex;
-      flex-direction: column;
-    }
+      flex-direction: column;}
 
     .display {
       height: 70px;
@@ -39,7 +38,6 @@
       align-items: center;
       justify-content: flex-end;
     }
-
     .buttons {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -94,31 +92,27 @@
     .btn-number {
       background: #f4f6fa;
     }
-
     .btn-number:hover {
       background: #e2e6ed;
     }
-
   </style>
 </head>
 <body>
-
   <div class="calculator">
-    <div class="display" id="display">0</div>
+<div class="display" id="display">0</div>
     <div class="buttons">
-      <button class="btn-clear" onclick="clearDisplay()">C</button>
-      <button class="btn-operator" onclick="appendOperator('/')">÷</button>
-      <button class="btn-operator" onclick="appendOperator('*')">×</button>
+     <button class="btn-clear" onclick="clearDisplay()">C</button>
+       <button class="btn-operator" onclick="appendOperator('/')">÷</button>
+ <button class="btn-operator" onclick="appendOperator('*')">×</button>
+<button class="btn-number" onclick="appendNumber('7')">7</button>
+ <button class="btn-number" onclick="appendNumber('8')">8</button>
+    <button class="btn-number" onclick="appendNumber('9')">9</button>
+  <button class="btn-operator" onclick="appendOperator('-')">−</button>
 
-      <button class="btn-number" onclick="appendNumber('7')">7</button>
-      <button class="btn-number" onclick="appendNumber('8')">8</button>
-      <button class="btn-number" onclick="appendNumber('9')">9</button>
-      <button class="btn-operator" onclick="appendOperator('-')">−</button>
-
-      <button class="btn-number" onclick="appendNumber('4')">4</button>
-      <button class="btn-number" onclick="appendNumber('5')">5</button>
-      <button class="btn-number" onclick="appendNumber('6')">6</button>
-      <button class="btn-operator" onclick="appendOperator('+')">+</button>
+   <button class="btn-number" onclick="appendNumber('4')">4</button>
+     <button class="btn-number" onclick="appendNumber('5')">5</button>
+  <button class="btn-number" onclick="appendNumber('6')">6</button>
+  <button class="btn-operator" onclick="appendOperator('+')">+</button>
 
       <button class="btn-number" onclick="appendNumber('1')">1</button>
       <button class="btn-number" onclick="appendNumber('2')">2</button>
@@ -132,14 +126,14 @@
 
   <script>
     let display = document.getElementById('display');
-    let currentInput = '';
+ let currentInput = '';
 
     function updateDisplay() {
       display.innerText = currentInput || '0';
     }
 
     function appendNumber(number) {
-      // Avoid leading zeros like 0005
+      // THIS is to Avoiding 0s at starting
       if (currentInput === '0') currentInput = '';
       currentInput += number;
       updateDisplay();
@@ -149,7 +143,7 @@
       if (currentInput === '') return;
       let lastChar = currentInput.slice(-1);
       if ("+-*/".includes(lastChar)) {
-        currentInput = currentInput.slice(0, -1); // replace last operator
+        currentInput = currentInput.slice(0, -1); // replacing last operator
       }
       currentInput += operator;
       updateDisplay();
@@ -157,7 +151,7 @@
 
     function appendDecimal() {
       let lastNum = currentInput.split(/[\+\-\*\/]/).pop();
-      if (lastNum.includes('.')) return; // prevent multiple decimals
+      if (lastNum.includes('.')) return; //  this helps in preventing multiple decimals 
       currentInput += '.';
       updateDisplay();
     }
@@ -171,25 +165,22 @@
       try {
         if (currentInput === '') return;
 
-        // Prevent eval of incomplete expressions like "5+"
+        // for incomplete Expressions (EX: 5+)
         if ("+-*/".includes(currentInput.slice(-1))) {
           currentInput = currentInput.slice(0, -1);
         }
-
         let result = eval(currentInput);
-
-        if (!isFinite(result)) {
-          display.innerText = "Cannot divide by 0";
+        if (!isFinite(result)) 
+        {  display.innerText = "Cannot divide by 0";
           currentInput = '';
           return;
-        }
+    }
 
         currentInput = result.toString();
         updateDisplay();
       } catch (error) {
         display.innerText = "Error";
-        currentInput = '';
-      }
+        currentInput = '';}
     }
   </script>
 
