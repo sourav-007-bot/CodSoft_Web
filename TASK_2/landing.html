@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page</title>
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f9f9f9;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    header {
+      background: linear-gradient(135deg, #7119dd, #0088ff, #00ff8c);
+      color: #fff;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header h1 {
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+    }
+    nav a {
+      margin-left: 20px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #ffeb3b;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: url('https://source.unsplash.com/1600x900/?technology,web') center/cover no-repeat;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+      padding: 0 20px;
+    }
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+    .hero button {
+      background: #ffeb3b;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .hero button:hover {
+      background: #ffc107;
+    }
+
+    /* About Section */
+    .about {
+      padding: 80px 50px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .about img {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+    .about-text h2 {
+      margin-bottom: 20px;
+      color: #007aff;
+    }
+    .about-text p {
+      margin-bottom: 15px;
+      color: #555;
+    }
+
+    /* Features Section */
+    .features {
+      background: #fff;
+      padding: 80px 50px;
+      text-align: center;
+    }
+    .features h2 {
+      margin-bottom: 50px;
+      font-size: 2rem;
+      color: #007aff;
+    }
+    .feature-boxes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    .feature {
+      background: #f4f4f4;
+      padding: 30px;
+      border-radius: 12px;
+      transition: transform 0.3s;
+    }
+    .feature:hover {
+      transform: translateY(-10px);
+      background: #e8f0fe;
+    }
+    .feature h3 {
+      margin-bottom: 15px;
+      color: #333;
+    }
+    .feature p {
+      color: #555;
+    }
+
+    /* Footer */
+    footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 50px;
+    }
+    footer p {
+      margin-bottom: 10px;
+    }
+    footer a {
+      color: #d1ff3b;
+      margin: 0 10px;
+      transition: color 0.3s;
+    }
+    footer a:hover {
+      color: #ffc107;
+    }
+
+    /* Responsive */
+    @media(max-width: 768px) {
+      .about {
+        grid-template-columns: 1fr;
+      }
+      .hero h2 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>My Landing Page</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h2>Welcome to My Professional Landing Page</h2>
+    <p>Create something unique and modern with HTML & CSS</p>
+    <button>Get Started</button>
+  </section>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <img src="https://source.unsplash.com/600x400/?coding,developer" alt="About Image">
+    <div class="about-text">
+      <h2>About This Project</h2>
+      <p>This landing page is designed to showcase modern and clean web design using only HTML and CSS. It demonstrates sections, layout techniques, responsiveness, and styling principles.</p>
+      <p>The project is beginner-friendly yet professional enough to present as a portfolio piece.</p>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <h2>Features</h2>
+    <div class="feature-boxes">
+      <div class="feature">
+        <h3>Responsive Design</h3>
+        <p>Optimized for all devices with a fluid, grid-based layout.</p>
+      </div>
+      <div class="feature">
+        <h3>Modern UI</h3>
+        <p>Minimalist look with clean typography and appealing visuals.</p>
+      </div>
+      <div class="feature">
+        <h3>Beginner Friendly</h3>
+        <p>Built entirely with HTML & CSS for easy understanding.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <p>Contact Me: <a href="mailto:sourav403purwal554@gmail.com">sourav403purwal554@gmail.com</a></p>
+    <p>Follow me on 
+      <a href="#">LinkedIn</a> | 
+      <a href="#">GitHub</a>
+    </p>
+    <p>&copy; 2025 My Landing Page. All rights reserved.</p>
+  </footer>
+</body>
+</html>

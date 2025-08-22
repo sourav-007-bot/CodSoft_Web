@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trendy Calculator</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .calculator {
+      background: #fff;
+      border-radius: 25px;
+      box-shadow: 0px 10px 35px rgba(0, 0, 0, 0.3);
+      width: 340px;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .display {
+      height: 70px;
+      background: #111;
+      color: rgb(0, 255, 115);
+      font-size: 2rem;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 25px;
+      text-align: right;
+      overflow-x: auto;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    button {
+      padding: 18px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    button:hover {
+      transform: scale(1.08);
+    }
+
+    .btn-operator {
+      background: #2575fc;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .btn-operator:hover {
+      background: #590fc1;
+    }
+
+    .btn-equal {
+      background: #a402df;
+      color: #fff;
+      grid-column: span 2;
+      font-weight: bold;
+    }
+
+    .btn-equal:hover {
+      background: #15c39d;
+    }
+
+    .btn-clear {
+      background: #d35b79;
+      color: #fff;
+      grid-column: span 2;
+      font-weight: bold;
+    }
+
+    .btn-clear:hover {
+      background: #b30808;
+    }
+
+    .btn-number {
+      background: #f4f6fa;
+    }
+
+    .btn-number:hover {
+      background: #e2e6ed;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+      <button class="btn-clear" onclick="clearDisplay()">C</button>
+      <button class="btn-operator" onclick="appendOperator('/')">÷</button>
+      <button class="btn-operator" onclick="appendOperator('*')">×</button>
+
+      <button class="btn-number" onclick="appendNumber('7')">7</button>
+      <button class="btn-number" onclick="appendNumber('8')">8</button>
+      <button class="btn-number" onclick="appendNumber('9')">9</button>
+      <button class="btn-operator" onclick="appendOperator('-')">−</button>
+
+      <button class="btn-number" onclick="appendNumber('4')">4</button>
+      <button class="btn-number" onclick="appendNumber('5')">5</button>
+      <button class="btn-number" onclick="appendNumber('6')">6</button>
+      <button class="btn-operator" onclick="appendOperator('+')">+</button>
+
+      <button class="btn-number" onclick="appendNumber('1')">1</button>
+      <button class="btn-number" onclick="appendNumber('2')">2</button>
+      <button class="btn-number" onclick="appendNumber('3')">3</button>
+      <button class="btn-equal" onclick="calculateResult()">=</button>
+
+      <button class="btn-number" onclick="appendNumber('0')">0</button>
+      <button class="btn-number" onclick="appendDecimal()">.</button>
+    </div>
+  </div>
+
+  <script>
+    let display = document.getElementById('display');
+    let currentInput = '';
+
+    function updateDisplay() {
+      display.innerText = currentInput || '0';
+    }
+
+    function appendNumber(number) {
+      // Avoid leading zeros like 0005
+      if (currentInput === '0') currentInput = '';
+      currentInput += number;
+      updateDisplay();
+    }
+
+    function appendOperator(operator) {
+      if (currentInput === '') return;
+      let lastChar = currentInput.slice(-1);
+      if ("+-*/".includes(lastChar)) {
+        currentInput = currentInput.slice(0, -1); // replace last operator
+      }
+      currentInput += operator;
+      updateDisplay();
+    }
+
+    function appendDecimal() {
+      let lastNum = currentInput.split(/[\+\-\*\/]/).pop();
+      if (lastNum.includes('.')) return; // prevent multiple decimals
+      currentInput += '.';
+      updateDisplay();
+    }
+
+    function clearDisplay() {
+      currentInput = '';
+      updateDisplay();
+    }
+
+    function calculateResult() {
+      try {
+        if (currentInput === '') return;
+
+        // Prevent eval of incomplete expressions like "5+"
+        if ("+-*/".includes(currentInput.slice(-1))) {
+          currentInput = currentInput.slice(0, -1);
+        }
+
+        let result = eval(currentInput);
+
+        if (!isFinite(result)) {
+          display.innerText = "Cannot divide by 0";
+          currentInput = '';
+          return;
+        }
+
+        currentInput = result.toString();
+        updateDisplay();
+      } catch (error) {
+        display.innerText = "Error";
+        currentInput = '';
+      }
+    }
+  </script>
+
+</body>
+</html>
