@@ -4,176 +4,146 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculator</title>
-  <style>
-  body { display: flex;
-      justify-content: center;
-      align-items: center;
+<style>
+    body {
+      display: flex; justify-content: center; align-items: center;
       height: 100vh; margin: 0;
       background: linear-gradient(135deg, #c35efc, #d373ff);
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-
-    .calculator { background: #bfb2f6;
-  border-radius: 25px; box-shadow: 0px 10px 35px rgba(0, 0, 0, 0.3);
-width: 360px;padding: 25px; display: flex;
-      flex-direction: column;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    .display { height: 70px;
-    background: #3b055a;
-    color: #00d4ff;  font-size: 2rem;
-      border-radius: 12px;padding: 15px;
-  margin-bottom: 25px;
-    text-align: right;
+  .calculator {
+      background: #bfb2f6; border-radius: 25px;
+      box-shadow: 0px 10px 35px rgba(0, 0, 0, 0.3);
+      width: 360px; padding: 25px; display: flex; flex-direction: column;
+    }
+ .display {
+      height: 70px; background: #3b055a; color: #00d4ff;
+      font-size: 2rem; border-radius: 12px; padding: 15px;
+      margin-bottom: 25px; text-align: right;
+      display: flex; align-items: center; justify-content: flex-end;
       overflow-x: auto;
-      display: flex;  align-items: center;
-justify-content: flex-end;
     }
-
-    .buttons {
+.buttons {
       display: grid;
   grid-template-columns: repeat(4, 1fr);
     gap: 14px;
     }
-
-    button { padding: 18px;
-    font-size: 1.2rem;
-  border: none;
-   border-radius: 14px;
-  cursor: pointer;
- transition: all 0.2s ease;
-    }
-  button:hover {
-    transform: scale(1.08);
-  }
-.btn-operator {
-  background: #eea907;
-      color: #fff;
-      font-weight: bold;
-    }
-    .btn-operator:hover {
-      background: #ee6707;
-    }
-    .btn-equal {
-    background: #0ee440;
-     color: #fff;
-  grid-column: span 2;font-weight: bold;
-  }
-  .btn-equal:hover {
-background: #06601b;
+   button {
+  padding: 18px; font-size: 1.2rem; border: none;
+ border-radius: 14px; cursor: pointer; transition: all 0.2s ease;
 }
-.btn-clear {
-  background: #dc356f;
- color: #fff;
-font-weight: bold;
-}
-.btn-clear:hover {  background: #c40619;}
-.btn-number { background: #f8f9b4;
-}
-.btn-number:hover {  background: #e2e6ed;
-}
-.btn-backspace {background: #8f09e8;
-  color: #fff; font-weight: bold; }
-.btn-backspace:hover {
-   background: #a60505; 
-}
-  </style>
+  button:hover { transform: scale(1.08); }
+.btn-operator { background: #eea907; color: #fff; font-weight: bold; }
+   .btn-operator:hover { background: #ee6707; }
+  .btn-equal { background: #0ee440; color: #fff; grid-column: span 2; font-weight: bold; }
+    .btn-equal:hover { background: #06601b; }
+.btn-clear { background: #dc356f; color: #fff; font-weight: bold; }
+  .btn-clear:hover { background: #c40619; }
+ .btn-number { background: #f8f9b4; }
+.btn-number:hover { background: #e2e6ed; }
+.btn-backspace { background: #8f09e8; color: #fff; font-weight: bold; }
+  .btn-backspace:hover { background: #a60505; }
+</style>
 </head>
 <body>
 <div class="calculator">
-  <div class="display" id="display">0</div>  <div class="buttons">
-      <button class="btn-clear" onclick="clearDisplay()">C</button>
-      <button class="btn-backspace" onclick="backspace()">⌫</button>
-      <button class="btn-operator" onclick="appendOperator('**')">xʸ</button>
-      <button class="btn-operator" onclick="appendOperator('/')">÷</button>
-
-      <button class="btn-number" onclick="appendNumber('7')">7</button>
-      <button class="btn-number" onclick="appendNumber('8')">8</button>
-      <button class="btn-number" onclick="appendNumber('9')">9</button>
-      <button class="btn-operator" onclick="appendOperator('*')">×</button>
-
-      <button class="btn-number" onclick="appendNumber('4')">4</button>
-      <button class="btn-number" onclick="appendNumber('5')">5</button>
-      <button class="btn-number" onclick="appendNumber('6')">6</button>
-      <button class="btn-operator" onclick="appendOperator('-')">−</button>
-
-      <button class="btn-number" onclick="appendNumber('1')">1</button>
-      <button class="btn-number" onclick="appendNumber('2')">2</button>
-      <button class="btn-number" onclick="appendNumber('3')">3</button>
-      <button class="btn-operator" onclick="appendOperator('+')">+</button>
-
-      <button class="btn-number" onclick="appendNumber('0')">0</button>
-      <button class="btn-number" onclick="appendDecimal()">.</button>
-      <button class="btn-equal" onclick="calculateResult()">=</button>
+  <div class="display" id="display">0</div>
+<div class="buttons" id="buttons"></div>
   </div>
-</div>
   <script>
-    let display = document.getElementById('display');
-    let currentInput = '';
-    let justCalculated = false;
-    function updateDisplay() { display.innerText = currentInput || '0'; }
+let display = document.getElementById('display');
+  let currentInput = '';    let justCalculated = false;
+function updateDisplay() {
+  display.innerText = currentInput || '0';
+}
   function appendNumber(number) {
-      if (justCalculated) {  currentInput = ''; // clear old result if new digit entered
-        justCalculated = false;} 
-        if (currentInput === '0') currentInput = '';
-      currentInput += number;
-    updateDisplay();
-    } function appendOperator(operator) {
-      if (currentInput === '' && operator !== '-') return;
+if (justCalculated) { currentInput = ''; justCalculated = false; }
+  if (currentInput === '0') currentInput = '';
+    currentInput += number;
+updateDisplay();
+}
+function appendOperator(operator) {
+  if (currentInput === '' && operator !== '-') return;
     let lastChar = currentInput.slice(-1);
-      if (justCalculated) {
-        justCalculated = false; // allow chaining after result
-      }
-      if ("+-*/**".includes(lastChar)) {
-        currentInput = currentInput.slice(0, -1); // replace last operator
-      }
-      currentInput += operator;
-      updateDisplay();
-    }
+  if (justCalculated) justCalculated = false;
+if ("+-*/**".includes(lastChar)) {
+  currentInput = currentInput.slice(0, -1);
+}
+ currentInput += operator;
+updateDisplay();
+  }
     function appendDecimal() {
-    if (justCalculated) {
-    currentInput = '0';
-  justCalculated = false;
-    }
-    let lastNum = currentInput.split(/[\+\-\*\/]/).pop();
+if (justCalculated) { currentInput = '0'; justCalculated = false; }
+let lastNum = currentInput.split(/[\+\-\*\/]/).pop();
   if (lastNum.includes('.')) return;
-     if (lastNum === '') currentInput += '0';
-  currentInput += '.';
+if (lastNum === '') currentInput += '0';
+currentInput += '.';
     updateDisplay();
     }
-    function clearDisplay() {
-    currentInput = '';
-    justCalculated = false;
-      updateDisplay();
+    function clearDisplay() {currentInput = ''; justCalculated = false;
+       updateDisplay();
     }
-    function backspace() {
-     if (justCalculated) {
-      clearDisplay(); // if result is showing, clear everything
-      } else {
-      currentInput = currentInput.slice(0, -1);        updateDisplay();
-      }
+    function backspace() {if (justCalculated) { clearDisplay(); }
+    else { currentInput = currentInput.slice(0, -1); updateDisplay(); }
     }
 
-    function calculateResult() {
-    try {
-    if (currentInput === '') return;
-      if ("+-*/".includes(currentInput.slice(-1))) {
-          currentInput = currentInput.slice(0, -1);
-        }
-      let result = eval(currentInput);
-        if (!isFinite(result)) {
-        display.innerText = "Cannot divide by 0";
-          currentInput = '';
-          return;
-      }
-
-        currentInput = result.toString();
-        updateDisplay();
-        justCalculated = true;
-      } catch (error) {
-        display.innerText = "Error";
+    function 
+    calculateResult() 
+    {
+    try { if (currentInput === '') return;
+    if ("+-*/".includes(currentInput.slice(-1))) {
+     currentInput = currentInput.slice(0, -1);
+     } let result = eval(currentInput);
+      if (!isFinite(result)) {
+       display.innerText = "Cannot divide by 0";
         currentInput = '';
-        justCalculated = false;
+      return;
+        }
+      currentInput = result.toString();
+        updateDisplay();
+      justCalculated = true;
+      } catch (error) {
+      display.innerText = "Error";
+      currentInput = ''; justCalculated = false;
       }
-      
+    }
+    const buttonsContainer = document.getElementById('buttons');
+    const specials = [
+      { label: 'C', class: 'btn-clear', action: clearDisplay },
+      { label: '⌫', class: 'btn-backspace', action: backspace },
+      { label: 'xʸ', class: 'btn-operator', action: () => appendOperator('**') },
+      { label: '÷', class: 'btn-operator', action: () => appendOperator('/') },
+    ];
+    specials.forEach(btn => createButton(btn.label, btn.class, btn.action));
+    const layout = [
+    ['7','8','9','*'],
+    ['4','5','6','-'],
+    ['1','2','3','+'],
+    ['0','.','=','']
+    ];
+    layout.forEach(row => {
+      row.forEach(symbol => {
+        if (symbol === '') return;
+        if (!isNaN(symbol)) { // number
+          createButton(symbol, 'btn-number', () => appendNumber(symbol));
+        }else if (symbol === '.') {
+          createButton('.', 'btn-number', appendDecimal);
+        }
+        else 
+        if (symbol === '=') {
+          createButton('=', 'btn-equal', calculateResult);
+        }
+        else { let displayOp = (symbol === '*') ? '×' : symbol;
+          createButton(displayOp, 'btn-operator', () => appendOperator(symbol));
+        }
+      });
+    });  
+    function createButton(label, className, action) {
+      let btn = document.createElement('button');
+      btn.innerText = label;
+      btn.className = className;
+      btn.addEventListener('click', action);
+      buttonsContainer.appendChild(btn);
     }
   </script>
 </body>
