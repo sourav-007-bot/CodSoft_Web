@@ -3,224 +3,148 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Landing Page</title>
+  <title>Secure Chat Application</title>
   <style>
-    /* Global Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    * {  margin: 0;
+    padding: 0;
+  box-sizing: border-box;   }
+  body {
+      font-family: Arial, Helvetica, sans-serif;
       line-height: 1.6;
-      color: #333;
-      background: #f9f9f9;
-    }
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-    header {
-      background: linear-gradient(135deg, #7119dd, #0088ff, #00ff8c);
       color: #fff;
-      padding: 20px 50px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+background: radial-gradient(circle at center, #6707a2, #9911cb);
     }
-    header h1 {
-      font-size: 1.8rem;
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+header { display: flex;
+       justify-content: space-between;
+        align-items: center;
+       padding: 20px 50px;
+         background: rgba(0, 0, 0, 0.3);
+       backdrop-filter: blur(6px);
+      position: sticky;top: 0; z-index: 100;
+    }
+header h1 { font-size: 28px;
+    font-weight: bold;
       letter-spacing: 1px;
     }
-    nav a {
-      margin-left: 20px;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-    nav a:hover {
-      color: #ffeb3b;
-    }
-
-    /* Hero Section */
-    .hero {
-      background: url('https://source.unsplash.com/1600x900/?technology,web') center/cover no-repeat;
-      height: 100vh;
+    nav ul {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
+      list-style: none;}
+    nav ul li {margin: 0 15px;}
+    nav ul li a {
+      text-decoration: none;
       color: #fff;
-      padding: 0 20px;
+      font-weight: bold;
+      transition: color 0.3s, transform 0.3s;
+}    nav ul li a:hover {
+      color: #ffdd57;
+      transform: scale(1.1);
     }
-    .hero h2 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+    .hero {
+      text-align: center;
+     padding: 100px 20px;
+      max-width: 900px;  margin: auto;
+    }
+   .hero h2 {
+     font-size: 48px;    margin-bottom: 20px;
+      animation: fadeIn 2s ease;
     }
     .hero p {
-      font-size: 1.2rem;
-      margin-bottom: 30px;
+    font-size: 20px;
+  margin-bottom: 30px;
+      color: #f1f1f1;
     }
-    .hero button {
-      background: #ffeb3b;
-      border: none;
+    .btn {
+    display: inline-block;
       padding: 12px 30px;
-      font-size: 1rem;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: background 0.3s;
+  background: #ffdd57;
+      color: #1d3557;
+     font-weight: bold;
+         border-radius: 30px;
+   text-decoration: none;
+    transition: all 0.3s ease-in-out;
+   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
-    .hero button:hover {
+
+    .btn:hover {
       background: #ffc107;
+    transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
     }
-
-    /* About Section */
-    .about {
-      padding: 80px 50px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: center;
-    }
-    .about img {
-      width: 100%;
+.features {
+display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+  padding: 60px 50px;      
+max-width: 1200px; margin: auto;
+  }
+  .feature {      background: rgba(0,0,0,0.3);
       border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    }
-    .about-text h2 {
-      margin-bottom: 20px;
-      color: #007aff;
-    }
-    .about-text p {
-      margin-bottom: 15px;
-      color: #555;
-    }
-
-    /* Features Section */
-    .features {
-      background: #fff;
-      padding: 80px 50px;
-      text-align: center;
-    }
-    .features h2 {
-      margin-bottom: 50px;
-      font-size: 2rem;
-      color: #007aff;
-    }
-    .feature-boxes {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-    }
-    .feature {
-      background: #f4f4f4;
-      padding: 30px;
-      border-radius: 12px;
-      transition: transform 0.3s;
-    }
-    .feature:hover {
-      transform: translateY(-10px);
-      background: #e8f0fe;
+     padding: 30px; text-align: center;
+       transition: transform 0.4s, box-shadow 0.4s;
+    } .feature:hover {
+      transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
     }
     .feature h3 {
-      margin-bottom: 15px;
-      color: #333;
-    }
-    .feature p {
-      color: #555;
+    margin-bottom: 15px;
+      color: #ffdd57;
     }
 
+    .feature p {
+      color: #e0e0e0;
+    }
     /* Footer */
     footer {
-      background: #333;
-      color: #fff;
       text-align: center;
-      padding: 30px 20px;
+      padding: 20px;
+      background: rgba(0,0,0,0.3);
       margin-top: 50px;
     }
-    footer p {
-      margin-bottom: 10px;
-    }
-    footer a {
-      color: #d1ff3b;
-      margin: 0 10px;
-      transition: color 0.3s;
-    }
-    footer a:hover {
-      color: #ffc107;
-    }
 
-    /* Responsive */
-    @media(max-width: 768px) {
-      .about {
-        grid-template-columns: 1fr;
-      }
-      .hero h2 {
-        font-size: 2.2rem;
-      }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
   <!-- Header -->
   <header>
-    <h1>My Landing Page</h1>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#features">Features</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+<h1>SecureChat</h1>
+<nav> <ul>   <li><a href="#">Home</a></li>
+         <li><a href="#">Features</a></li>
+      <li><a href="#">Download</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+</nav> </header>
 
-  <!-- Hero Section -->
   <section class="hero">
-    <h2>Welcome to My Professional Landing Page</h2>
-    <p>Create something unique and modern with HTML & CSS</p>
-    <button>Get Started</button>
+    <h2>Secure. Private. Reliable.</h2>
+    <p>Your conversations deserve the highest level of privacy and encryption. SecureChat ensures your data stays safe, always.</p>
+    <a href="#" class="btn">Get Started</a>
   </section>
-
-  <!-- About Section -->
-  <section class="about" id="about">
-    <img src="https://source.unsplash.com/600x400/?coding,developer" alt="About Image">
-    <div class="about-text">
-      <h2>About This Project</h2>
-      <p>This landing page is designed to showcase modern and clean web design using only HTML and CSS. It demonstrates sections, layout techniques, responsiveness, and styling principles.</p>
-      <p>The project is beginner-friendly yet professional enough to present as a portfolio piece.</p>
-    </div>
-  </section>
-
   <!-- Features Section -->
-  <section class="features" id="features">
-    <h2>Features</h2>
-    <div class="feature-boxes">
-      <div class="feature">
-        <h3>Responsive Design</h3>
-        <p>Optimized for all devices with a fluid, grid-based layout.</p>
-      </div>
-      <div class="feature">
-        <h3>Modern UI</h3>
-        <p>Minimalist look with clean typography and appealing visuals.</p>
-      </div>
-      <div class="feature">
-        <h3>Beginner Friendly</h3>
-        <p>Built entirely with HTML & CSS for easy understanding.</p>
-      </div>
-    </div>
+  <section class="features">
+    <div class="feature"> <h3>🔒 End-to-End Encryption</h3>
+      <p>All messages are encrypted to keep your conversations safe from hackers and third parties.</p> </div>
+  <div class="feature">      <h3>⚡ Fast & Reliable</h3>
+      <p>Enjoy smooth, real-time messaging with lightning-fast servers and optimized performance.</p>
+  </div>
+ <div class="feature">
+      <h3>📱 Cross-Platform</h3>
+   <p>Chat securely on mobile, desktop, and web apps with seamless synchronization.</p>
+</div>
+ <div class="feature">
+   <h3>🛡️ Privacy First</h3>
+ <p>We respect your privacy — no ads, no data selling, just secure communication.</p> </div>
   </section>
-
-  <!-- Footer -->
-  <footer id="contact">
-    <p>Contact Me: <a href="mailto:sourav403purwal554@gmail.com">sourav403purwal554@gmail.com</a></p>
-    <p>Follow me on 
-      <a href="#">LinkedIn</a> | 
-      <a href="#">GitHub</a>
-    </p>
-    <p>&copy; 2025 My Landing Page. All rights reserved.</p>
+  <footer>
+    <p>© 2025 SecureChat. All rights reserved.</p>
   </footer>
 </body>
 </html>
